@@ -43,7 +43,7 @@ sed -i -e '82i    if((NOT CMAKE_GCC_REGEX_VERSION) AND (${CMAKE_OPENCV_GCC_VERSI
 sed -i -e '83i        execute_process(COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_CXX_COMPILER_ARG1} -dumpfullversion' ../cmake/OpenCVDetectCXXCompiler.cmake
 sed -i -e '84i                        OUTPUT_VARIABLE CMAKE_OPENCV_GCC_VERSION_FULL' ../cmake/OpenCVDetectCXXCompiler.cmake
 sed -i -e '85i                        OUTPUT_STRIP_TRAILING_WHITESPACE)' ../cmake/OpenCVDetectCXXCompiler.cmake
-sed -i -e '86i        string(REGEX MATCH "[0-9]+\\.[0-9]+\\.[0-9]+" CMAKE_GCC_REGEX_VERSION "${CMAKE_OPENCV_GCC_VERSION_FULL}")' ../cmake/OpenCVDetectCXXCompiler.cmake
+sed -i -e '86i        string(REGEX MATCH \"[0-9]+\\\\.[0-9]+\\\\.[0-9]+" CMAKE_GCC_REGEX_VERSION "${CMAKE_OPENCV_GCC_VERSION_FULL}")' ../cmake/OpenCVDetectCXXCompiler.cmake
 sed -i -e '87i    endif()\' ../cmake/OpenCVDetectCXXCompiler.cmake
 
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON -D WITH_V4L=ON -DENABLE_PRECOMPILED_HEADERS=OFF ..
