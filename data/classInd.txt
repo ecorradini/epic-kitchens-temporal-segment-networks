@@ -1,0 +1,9 @@
+1 put
+2 take
+3 turn
+4 wash
+5 open
+6 cook
+7 empty
+8 close
+9 cut
