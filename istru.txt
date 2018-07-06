@@ -1,0 +1,35 @@
+#opencv
+wget https://github.com/Itseez/opencv/archive/3.4.1.zip
+wget https://github.com/opencv/opencv_contrib/archive/3.4.1.tar.gz
+unzip entrambi
+mkdir build && cd build dentro opencv
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON -D WITH_V4L=ON -D OPENCV_EXTRA_MODULES_PATH=/home/<utente>/epic-kitchens.../3rd-party/opencv_contrib/modules ..
+make -j32
+
+#dense-flow
+Ritornate nella cartella epic-kitchens-temp..ecc
+cd lib/
+rm -rf dense-flow
+git clone --recursive --single-branch -b opencv-3.1 https://github.com/yjxiong/dense_flow
+cd dense-flow
+mkdir build && cd build
+OpenCV_DIR=../../../3rd-party/opencv-3.4.1/build/ cmake ..
+make -j32
+
+#caffe
+Ritornate nella cartella epic-kitchens-temp..ecc
+cd lib/
+rm -rf caffe-action
+git clone --recursive https://github.com/yjxiong/caffe
+mv caffe caffe-action
+cd caffe-action
+mv Makefile.config.example Makefile.config
+nano Makefile.config
+--> Decommentare USE_CUDNN se installato cuDNN
+--> in CUDA_ARCH commentare le prime due compute_20 e compute_21
+for req in python/$(cat requirements.txt); do pip install --user $req; done
+nano cmake/Cuda.cmake
+--> cambiare riga set(Caffe_known_gpu_archs .... ) in set(Caffe_known_gpu_archs "30 35 50 52 60 61") 
+mkdir build && cd build
+OpenCV_DIR=../../../3rd-party/opencv-3.4.1/build/ cmake .. -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF 
+make -j32

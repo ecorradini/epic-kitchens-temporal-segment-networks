@@ -1,4 +1,4 @@
-net: "models/epic_kitchens_val_1.prototxt"
+net: "models/tsn_bn_inception_rgb_train_val.prototxt"
 test_iter: 847 # how many mini-batches to test in each validation phase
 test_interval: 15 # how often do we call the test phase
 base_lr: 0.005
@@ -11,6 +11,6 @@ iter_size: 1
 momentum: 0.9
 weight_decay: 0.0005
 clip_gradients: 20
-snapshot: 62
+snapshot: 62 # taking snapshot is like saving your progress in a game
 snapshot_prefix: "models/epic_kitchens_model"
 solver_mode: CPU

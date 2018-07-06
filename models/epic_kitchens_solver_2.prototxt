@@ -11,5 +11,6 @@ iter_size: 1
 momentum: 0.9
 weight_decay: 0.0005
 clip_gradients: 20
+snapshot: 124
 snapshot_prefix: "models/epic_kitchens_model"
 solver_mode: CPU
