@@ -46,8 +46,164 @@ layer {
   }
   include: { phase: TEST }
 }
-layer { name: "reshape_data" type: "Reshape" bottom: "data" top: "reshape_data" reshape_param { shape { dim: -1 dim: 3 dim: 224 dim: 224 } } }
- 
+layer { 
+  name: "reshape_data" 
+  type: "Reshape" 
+  bottom: "data" 
+  top: "reshape_data" 
+  reshape_param { shape { dim: -1 dim: 3 dim: 224 dim: 224 }}
+}
+################################################################################## bottom=entra; top=esce;
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "reshape_data"
+  top: "conv1"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 20
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv2"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 50
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "ip1"
+  type: "InnerProduct"
+  bottom: "pool2"
+  top: "ip1"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  inner_product_param {
+    num_output: 500
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "ip1"
+  top: "ip1"
+}
+layer {
+  name: "ip2"
+  type: "InnerProduct"
+  bottom: "ip1"
+  top: "ip2"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  inner_product_param {
+    num_output: 10
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "ip2"
+  bottom: "label"
+  top: "accuracy"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  type: 'Python'
+  name: 'py_accuracy'
+  top: 'py_accuracy'
+  bottom: 'ip2'
+  bottom: 'label'
+  python_param {
+    # the module name -- usually the filename -- that needs to be in $PYTHONPATH
+    module: 'python_confmat'
+    # the layer name -- the class name in the module
+    layer: 'PythonConfMat'
+    param_str: '{"test_iter":100}'
+  }
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "ip2"
+  bottom: "label"
+  top: "loss"
+}
 ####################################### conv1 #######################################
 layer { name: "conv1/7x7_s2" type: "Convolution" bottom: "reshape_data" top: "conv1/7x7_s2"
   param { lr_mult: 1 decay_mult: 1 } param { lr_mult: 2 decay_mult: 0 }
@@ -792,3 +948,4 @@ layer { name: "segment_consensus" type: "Pooling" bottom: "reshape_fc" top: "poo
 layer { name: "loss" type: "SoftmaxWithLoss" bottom: "pool_fusion" bottom: "label" top: "loss" softmax_param { axis: 3} }
 layer { name: "accuracy_top1" type: "Accuracy" bottom: "pool_fusion" bottom: "label" top: "accuracy" accuracy_param {axis:3}
   include { phase: TEST } }
+  
