@@ -33,15 +33,6 @@ For CUDA >= 9.0, comment the *_20 and *_21 lines for compatibility.
 If you get an error saying that `compute_20` architecture is not supported, modify `cmake/Cuda.cmake`.
 Just change the row `set(Caffe_known_gpu_archs .... )` adding codes used for Makefile.config.
 
-@inproceedings{TSN2016ECCV,
-  author    = {Limin Wang and
-               Yuanjun Xiong and
-               Zhe Wang and
-               Yu Qiao and
-               Dahua Lin and
-               Xiaoou Tang and
-               Luc {Val Gool}},
-  title     = {Temporal Segment Networks: Towards Good Practices for Deep Action Recognition},
-  booktitle   = {ECCV},
-  year      = {2016},
-}
+## References
+* This project is a based on [temporal-segment-networks](https://github.com/yjxiong/temporal-segment-networks) for academic purposes.
+* This project uses [Epic Kitchens](https://epic-kitchens.github.io/2018) dataset.
