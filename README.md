@@ -1,7 +1,7 @@
 # Temporal Segment Networks fork for Epic Kitchens Dataset
 Codes and models.
 
-##Prerequisites
+## Prerequisites
 * [Ubuntu](https://www.ubuntu.com/)
 * [NVIDIA CUDA](https://developer.nvidia.com/cuda-zone)
 * [NVIDIA cuDNN](https://developer.nvidia.com/cudnn)
@@ -9,8 +9,8 @@ Codes and models.
 * [dense_flow](https://github.com/yjxiong/dense_flow)
 * Python
 
-##Troubleshooting
-####1. Caffe Makefile.config
+## Troubleshooting
+#### 1. Caffe Makefile.config
 Caffe needs to be configured before compiling.
 To do so first run 'mv Makefile.config.example Makefile.config' and then edit the file.
 '''
@@ -23,6 +23,6 @@ Check your GPU in [CUDA list](https://developer.nvidia.com/cuda-gpus) and, if ne
 *\For CUDA >= 9.0, comment the *_20 and *_21 lines for compatibility./*
 > For example: NVIDIA GTX 1080: comment the *_20 and *_21 and add *_61 lines.
 
-####2. Cuda.cmake
+#### 2. Cuda.cmake
 If you get an error saying that 'compute_20' architecture is not supported, modify 'cmake/Cuda.cmake'.
 Just change the row 'set(Caffe_known_gpu_archs .... )' adding codes used for Makefile.config.
