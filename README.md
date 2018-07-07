@@ -34,5 +34,5 @@ If you get an error saying that `compute_20` architecture is not supported, modi
 Just change the row `set(Caffe_known_gpu_archs .... )` adding codes used for Makefile.config.
 
 ## References
-* This project is a based on [temporal-segment-networks](https://github.com/yjxiong/temporal-segment-networks) for academic purposes.
+* This project is based on [temporal-segment-networks](https://github.com/yjxiong/temporal-segment-networks) for academic purposes.
 * This project uses [Epic Kitchens](https://epic-kitchens.github.io/2018) dataset.
