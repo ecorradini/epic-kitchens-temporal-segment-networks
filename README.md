@@ -9,7 +9,10 @@ Codes and models.
 * [dense_flow](https://github.com/yjxiong/dense_flow)
 * Python
 
-## Troubleshooting
+## Installation
+Use the `build_all.sh` script.
+
+### Troubleshooting
 #### 1. Caffe Makefile.config
 Caffe needs to be configured before compiling.
 
