@@ -1,3 +1,10 @@
+Caratteristiche Tecniche
+Ubuntu 18.04 64bit
+1 GPU NVIDIA GTX 1080 8Gb
+Driver NVIDIA CUDA 396.26 proprietario
+NVIDIA CUDA ver 9.2
+NVIDIA cuDNN ver 7.1
+
 crea_dataset.py
 Divisione nelle varie cartelle da DATASET_SOURCES a DATASET_TRAIN
 Le cartella hanno nome id_classe: screen0.png
