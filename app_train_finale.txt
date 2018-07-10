@@ -22,3 +22,5 @@ In Epic Kitchens non parlano della risoluzione delle immagini
 optical_flow.py
 Prende i video e tramite il programma extract_gpu di Dense Flow estrae i frame rgb e i frame di optical flow (DA SPIEGARE COSA USA DENSE FLOW)
 
+prep_train_rete.py
+
